@@ -1,0 +1,42 @@
+{{#if logueado}}
+
+  <h2>Hola {{dbUser.first_name}} {{dbUser.last_name}}</h2>
+  <p>Rol: {{#if dbUser.admin}}Admin{{else}}User{{/if}}</p>
+  <a href="http://localhost:8080/profile">Ver perfil</a>
+
+
+  <form action="/api/sessions" method="get"><button
+      type="submit"
+    >LOGOUT</button></form>
+
+{{else}}
+  <p>Para poder comprar tenés que loguearte o crear una cuenta</p>
+
+  <a href="http://localhost:8080/login">Login</a>
+  <a href="http://localhost:8080/register">Crear cuenta</a>
+
+{{/if}}
+
+<h2>Productos</h2>
+<ul>
+  {{#each response.payload}}
+    <li>Producto: {{this.title}} - - Precio: {{this.price}}</li>
+    {{#if ../logueado}}
+      <form
+        action="/api/carts/65f8b2c5688828f94669d2e0/products/{{this._id}}"
+        method="post"
+      >
+        <button type="submit">Agregar al carrito</button>
+      </form>
+    {{/if}}
+
+  {{/each}}
+</ul>
+<div>
+  {{#if response.hasPrevPage}}
+    <a href={{response.prevLink}}>Anterior</a>
+  {{/if}}
+  {{#if response.hasNextPage}}
+    <a href={{response.nextLink}}>Siguiente</a>
+  {{/if}}
+</div>

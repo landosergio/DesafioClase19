@@ -1,0 +1,19 @@
+{{#if logueado}}
+
+  <p>Nombre: {{dbUser.first_name}}</p>
+  <p>Apellido: {{dbUser.last_name}}</p>
+  <p>Edad: {{dbUser.age}}</p>
+
+  <form action="/api/sessions/" method="get"><button
+      type="submit"
+    >LOGOUT</button></form>
+
+  <a href="http://localhost:8080/products">Ir a comprar</a>
+
+{{else}}
+  <p>Primero debes loguearte o crear una cuenta</p>
+
+  <a href="http://localhost:8080/login">Login</a>
+  <a href="http://localhost:8080/register">Crear cuenta</a>
+
+{{/if}}
